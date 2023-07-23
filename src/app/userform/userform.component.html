@@ -1,0 +1,51 @@
+<form [formGroup]="formNewUser">
+<h1 mat-dialog-title>Hola, {{data ==null ? 'registremos un nuevo usuario' : 'editemos un usuario'}}</h1>
+<div mat-dialog-content>
+    <div class="container">
+        <div class="col-12">
+            <div class="row-10">
+                <p>Nombre de usuario</p>
+                <mat-form-field>
+                    <mat-label>usuario</mat-label>
+                    <input matInput formControlName="username" >
+                </mat-form-field>
+            </div>
+            <div class="row-10" *ngIf="data ==null">
+                <p>Contraseña</p>
+                <mat-form-field>
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput formControlName="password" [type]="hidePass ? 'password' : 'text'" >
+                    <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="row-10">
+                <p>Nombre completo</p>
+                <mat-form-field>
+                    <mat-label>nombre</mat-label>
+                    <input matInput formControlName="fullName">
+                </mat-form-field>
+            </div>
+            <div class="row-10">
+                <p>Dirección de correo electrónico</p>
+                <mat-form-field>
+                    <mat-label>email</mat-label>
+                    <input matInput formControlName="email">
+                </mat-form-field>
+            </div>
+            <div class="row-10">
+                <p>Rol</p>
+                <mat-form-field>
+                    <mat-label>Seleccione un rol</mat-label>
+                    <mat-select formControlName="roleid">
+                        <mat-option *ngFor="let role of roles" [value]="role.id">{{role.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">No gracias</button>
+  <button *ngIf="formNewUser.valid" mat-button cdkFocusInitial (click)="saveUser()">Guardar</button>
+</div>
+</form>

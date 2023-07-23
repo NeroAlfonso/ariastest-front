@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="https://ariasmusic.com/public/img/entorno/logotrasparent.png" alt="" width="72" height="72">
+      <h2>Bienvenido {{tokenPay.username}}</h2>
+      <p class="lead">Desde este panel de control, usted podrá administrar los usuarios de ariastest.</p>
+    </div>
+    <div class="row">
+      <div class="col-10">
+        <mat-form-field class="filterinput">
+          <mat-label>Filtro</mat-label>
+          <input matInput  placeholder="Ejemplo: Luis" #input (keyup)="applyFilter($event)">
+        </mat-form-field>
+      </div>
+      <div class="col-1">
+        <button mat-icon-button aria-label="Salir del sistema" matTooltip="Salir del sistema" (click)="exit()">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
+       
+    </div>
+          <div class="row">
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="userList" matSort>
+          
+   
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let row">{{row.id}}</td>
+              </ng-container>
+          
+        
+              <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
+                <td mat-cell *matCellDef="let row">{{row.username}}</td>
+              </ng-container>
+          
+     
+              <ng-container matColumnDef="fullname">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                <td mat-cell *matCellDef="let row">{{row.fullName}}</td>
+              </ng-container>
+          
+      
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                <td mat-cell *matCellDef="let row">{{row.email}}</td>
+              </ng-container>
+              <ng-container matColumnDef="rolename">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+                <td mat-cell *matCellDef="let row">{{row.rolename}}</td>
+              </ng-container>
+              <ng-container matColumnDef="controls">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                <td mat-cell *matCellDef="let row">
+                  <button mat-icon-button aria-label="Editar usuario" (click)="openUserForm(row)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button aria-label="Eliminar usuario" (click)="deleteUser(row.id)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+              
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4" class="placeholdertext">Ningún dato para mostrar.</td>
+              </tr>
+            </table>
+            <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Seleccione una página"></mat-paginator>
+          </div>
+    </div>
+    <div class="row-6">
+      <mat-card class="coacktail-card">
+        <mat-card-header>
+          <mat-card-title>{{currentCocktail.strDrink}}</mat-card-title>
+          <mat-card-subtitle>{{currentCocktail.strCategory}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="currentCocktail.strDrinkThumb" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+            {{currentCocktail.strInstructions}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="newCocktail()">Otro cóctel</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+</div>
+<div class="fabaddnewuser">
+  <button mat-fab color="primary" aria-label="Nuevo usuario" (click)="openUserForm(null)">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="px-4 py-5 my-5 text-center">
+        <form [formGroup]="$any(formLogin)">
+            <img class="d-block mx-auto mb-10" src="https://ariasmusic.com/public/img/entorno/logotrasparent.png" alt="" width="72" height="57">
+            <h1 class="display-5 fw-bold">Bienvenido</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">
+                    <mat-form-field >
+                        <mat-label>Usuario</mat-label>
+                        <input matInput formControlName="username">
+                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    
+                      </mat-form-field>
+                      <br>
+                
+                      <mat-form-field >
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput formControlName="password" [type]="hidePass ? 'password' : 'text'">
+                        <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </mat-form-field>
+                </p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <button mat-raised-button (click)="login()">Entrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
